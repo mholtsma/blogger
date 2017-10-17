@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const Blog = require('./models/model');
 
 // declare axios for making http requests
 const axios = require('axios');
@@ -12,17 +13,17 @@ router.get('/', (req, res) => {
 });
 
 // Get all posts
-router.get('/posts', (req, res) => {
-  // Get posts from the mock api
-  // This should ideally be replaced with a service that connects to MongoDB
-  axios.get(`${API}/posts`)
-  .then(posts => {
-  res.status(200).json(posts.data);
+app.post('/posts', (req, res) => {
+  let Blog = new Blog({
+    text: req.body.text
+  })
+
+  todo.save().then((doc) => {
+  res.send(doc)
+}, (e) => {
+  res.status(400).send(e)
 })
-.catch(error => {
-  res.status(500).send(error)
-});
-});
+})
 
 
 module.exports = router;

@@ -4,13 +4,10 @@ const path = require('path');
 const http = require('http');
 const bodyParser = require('body-parser');
 
-var MongoClient = require('mongodb').MongoClient
+var MongoClient = require('mongodb').MongoClient;
 
 var uri = "mongodb://admin:Pineapple123@cluster0-shard-00-00-tfniz.mongodb.net:27017,cluster0-shard-00-01-tfniz.mongodb.net:27017,cluster0-shard-00-02-tfniz.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin";
-MongoClient.connect(uri, function(err, db) {
-  console.log('Connected to DB');
-  db.close();
-});
+mongoose.connect(uri);
 
 // Get our API routes
 const api = require('./server/routes/api');
