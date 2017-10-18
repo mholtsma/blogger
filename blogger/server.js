@@ -3,6 +3,7 @@ const express = require('express');
 const path = require('path');
 const http = require('http');
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
 
 var MongoClient = require('mongodb').MongoClient;
 

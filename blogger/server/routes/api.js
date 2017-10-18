@@ -1,10 +1,25 @@
 const express = require('express');
 const router = express.Router();
-const Blog = require('./models/model');
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
 
 // declare axios for making http requests
 const axios = require('axios');
-const API = 'https://jsonplaceholder.typicode.com';
+
+var blogSchema = new Schema({
+  title:  String,
+  author: String,
+  body:   String,
+  comments: [{ body: String, date: Date }],
+  date: { type: Date, default: Date.now },
+  hidden: Boolean,
+  meta: {
+    votes: Number,
+    favs:  Number
+  }
+});
+
+var Blog = mongoose.model('Blog', blogSchema);
 
 /* GET api listing. */
 router.get('/', (req, res) => {
@@ -12,18 +27,16 @@ router.get('/', (req, res) => {
   console.log('hello world');
 });
 
-// Get all posts
-app.post('/posts', (req, res) => {
-  let Blog = new Blog({
-    text: req.body.text
-  })
+var testBlogPost = new Blog({
+  title: 'Test',
+  author: 'Marc',
+  body: 'This is a test'
+});
 
-  todo.save().then((doc) => {
-  res.send(doc)
-}, (e) => {
-  res.status(400).send(e)
-})
-})
+testBlogPost.save(function (err) {
+  if (err) return handleError(err);
+  // saved!
+});
 
 
 module.exports = router;
