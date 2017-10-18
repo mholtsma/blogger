@@ -21,12 +21,6 @@ var blogSchema = new Schema({
 
 var Blog = mongoose.model('Blog', blogSchema);
 
-/* GET api listing. */
-router.get('/', (req, res) => {
-  res.send('hello test');
-  console.log('hello world');
-});
-
 var testBlogPost = new Blog({
   title: 'Test',
   author: 'Marc',
@@ -36,6 +30,16 @@ var testBlogPost = new Blog({
 testBlogPost.save(function (err) {
   if (err) return handleError(err);
   // saved!
+});
+
+router.get('/', function(req, res) {
+  Blog.find(function(err, blogs){
+    if(err){
+      res.send(err);
+    }
+    console.log('hello world');
+    res.json(blogs);
+  });
 });
 
 
