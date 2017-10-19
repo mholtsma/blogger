@@ -7,6 +7,7 @@ import {RouterModule} from "@angular/router";
 import {FormsModule} from "@angular/forms";
 import {HttpModule} from "@angular/http";
 import {PostsService} from "./posts.service";
+import { CommentsComponent } from './comments/comments.component';
 
 // Define the routes
 const ROUTES = [
@@ -18,13 +19,18 @@ const ROUTES = [
   {
     path: 'posts',
     component: PostsComponent
+  },
+  {
+    path: 'comments',
+    component: CommentsComponent
   }
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
-    PostsComponent
+    PostsComponent,
+    CommentsComponent
   ],
   imports: [
     BrowserModule,
