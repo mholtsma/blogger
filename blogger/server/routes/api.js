@@ -4,18 +4,19 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var Blog = require('../models/model');
 var Comment = require('../models/comments.model');
+var db = mongoose.connect("mongodb://admin:Pineapple123@cluster0-shard-00-00-tfniz.mongodb.net:27017,cluster0-shard-00-01-tfniz.mongodb.net:27017,cluster0-shard-00-02-tfniz.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin");
 
 // declare axios for making http requests
 const axios = require('axios');
 
-var testComment = new Comment ({
-  text: 'WE COMMENTING BABY',
-  author: 'Moi'
-});
-
-testComment.save(function (err) {
-  if (err) return handleError(err);
-});
+// var testComment = new Comment ({
+//   text: 'WE COMMENTING BABY',
+//   author: 'Moi'
+// });
+//
+// testComment.save(function (err) {
+//   if (err) return handleError(err);
+// });
 
 
 // var blogSchema = new Schema({
@@ -44,13 +45,23 @@ testComment.save(function (err) {
 //   // saved!
 // });
 
-router.get('/', function(req, res) {
-  Blog.find(function(err, blogs){
-    if(err){
+// router.get('/', function(req, res) {
+//   Blog.find(function(err, blogs){
+//     if(err){
+//       res.send(err);
+//     }
+//     console.log('hello world');
+//     res.json(blogs);
+//   });
+// });
+
+// Get all comments
+router.get('/comments', function(req, res) {
+  db.find(function (err, comments) {
+    if (err) {
       res.send(err);
     }
-    console.log('hello world');
-    res.json(blogs);
+    res.json(comments);
   });
 });
 

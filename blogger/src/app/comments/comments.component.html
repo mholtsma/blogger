@@ -1,1 +1,10 @@
 <h1>COMMENTS</h1>
+<div class="container">
+  <div class="row" *ngFor="let c of comments">
+    <div class="card card-block">
+      <p class="card-text">{{c.text}}</p>
+      <p class="card-text">{{c.author}}</p>
+      <p class="card-text">{{c.date}}</p>
+    </div>
+  </div>
+</div>

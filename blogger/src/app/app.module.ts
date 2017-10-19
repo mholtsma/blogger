@@ -8,6 +8,7 @@ import {FormsModule} from "@angular/forms";
 import {HttpModule} from "@angular/http";
 import {PostsService} from "./posts.service";
 import { CommentsComponent } from './comments/comments.component';
+import {CommentsService} from "./comments.service";
 
 // Define the routes
 const ROUTES = [
@@ -38,7 +39,10 @@ const ROUTES = [
     HttpModule,
     RouterModule.forRoot(ROUTES) // Add routes to the app
   ],
-  providers: [PostsService],
+  providers: [
+    PostsService,
+    CommentsService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
