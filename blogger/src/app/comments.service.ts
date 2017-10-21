@@ -10,6 +10,9 @@ export class CommentsService {
   // Get all comments from API
   getAllComments() {
     return this.http.get('/api/comments')
-      .map(res => res.json());
+      //.map(res => res.json());
+      .map(function(res) {
+        res.json();
+      });
   }
 }

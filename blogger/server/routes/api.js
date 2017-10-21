@@ -45,33 +45,23 @@ const axios = require('axios');
 //   // saved!
 // });
 
-// router.get('/', function(req, res) {
+// router.get('/posts', function(req, res) {
 //   Blog.find(function(err, blogs){
 //     if(err){
 //       res.send(err);
 //     }
-//     console.log('hello world');
 //     res.json(blogs);
 //   });
 // });
-
-// Get all comments
+//
+// // Get all comments
 // router.get('/comments', function(req, res) {
-//   db.find(function (err, comments) {
+//   Comment.find(function (err, comments) {
 //     if (err) {
 //       res.send(err);
 //     }
 //     res.json(comments);
 //   });
 // });
-
-router.get('/comments', function(req, res) {
-  Comment.find(function (err, comments) {
-    if (err) {
-      res.send(err);
-    }
-    res.json(comments);
-  });
-});
 
 module.exports = router;
