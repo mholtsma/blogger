@@ -56,8 +56,17 @@ const axios = require('axios');
 // });
 
 // Get all comments
+// router.get('/comments', function(req, res) {
+//   db.find(function (err, comments) {
+//     if (err) {
+//       res.send(err);
+//     }
+//     res.json(comments);
+//   });
+// });
+
 router.get('/comments', function(req, res) {
-  db.find(function (err, comments) {
+  Comment.find(function (err, comments) {
     if (err) {
       res.send(err);
     }
