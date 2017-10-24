@@ -13,4 +13,9 @@ export class PostsService {
       .map(res => res.json());
   }
 
+  //post blog post to the server
+  postBlogPost(body){
+    this.http.post('/api/postBlog', body).subscribe();
+  }
+
 }

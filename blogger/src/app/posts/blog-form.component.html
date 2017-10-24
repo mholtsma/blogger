@@ -1,0 +1,22 @@
+
+<h1>Blog Form </h1>
+<form [formGroup]="blogPostForm" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <label for="title">Title</label>
+    <input type="text" class="form-control" id="title" required formControlName="title" name="title">
+  </div>
+
+  <div class="form-group">
+    <label for="author">author</label>
+    <input type="text" class="form-control" id="author" formControlName="author" name="author">
+  </div>
+
+  <div class="form-group">
+    <label for="body">body</label>
+    <input type="text" class="form-control" id="body" formControlName="body" name="body">
+  </div>
+
+  <button type="submit" class="btn btn-success" >Submit</button>
+
+</form>
+

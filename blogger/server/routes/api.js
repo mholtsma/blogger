@@ -27,12 +27,15 @@ var testBlogPost = new Blog({
   body: 'This is a test'
 });
 
-testBlogPost.save(function (err) {
-  if (err) return handleError(err);
+//Example saving something to database
+//testBlogPost.save(function (err) {
+//  if (err) return handleError(err);
   // saved!
-});
+//});
 
-router.get('/', function(req, res) {
+//Example query to database
+
+router.get('/posts', function(req, res) {
   Blog.find(function(err, blogs){
     if(err){
       res.send(err);
@@ -41,6 +44,20 @@ router.get('/', function(req, res) {
     res.json(blogs);
   });
 });
+
+router.post('/postBlog', function(req, res) {
+  console.log('In router post');
+  console.log(req.body.title);
+  var blogPost = new Blog({
+    title: req.body.title,
+    author: req.body.author,
+    body: req.body.body
+  });
+  blogPost.save(function (err) {
+    if (err) return handleError(err);
+  });
+});
+
 
 
 module.exports = router;
