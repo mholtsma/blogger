@@ -11,6 +11,7 @@ import {PostsService} from '../posts.service';
   templateUrl: './blog-form.component.html'
 })
 export class BlogFormComponent {
+  // intialize a form
   blogPostForm: FormGroup;
 
   constructor(
@@ -20,6 +21,7 @@ export class BlogFormComponent {
     this.createForm();
   }
 
+  // create the form
   createForm(){
     this.blogPostForm = this.fb.group({
       title: '',
@@ -28,6 +30,9 @@ export class BlogFormComponent {
     });
   }
 
+  // when the submit button is pressed we process the data
+  // and call the post request function from the service
+  // make sure the form has the (ngSubmit)="onSubmit()" in the form tag to call this function
   onSubmit() {
     console.log('In onSubmit');
     console.log(this.blogPostForm.get('title').value);

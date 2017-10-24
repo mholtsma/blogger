@@ -13,8 +13,19 @@ export class PostsService {
       .map(res => res.json());
   }
 
-  //post blog post to the server
+  // post blog post to the server
   postBlogPost(body){
+    // the .subscribe is what causes the request
+    // body is what you are sending
+    // in this case body is:
+    /*
+    body{
+      title: 'some string',
+     author: 'some string',
+     body: 'some string'
+    }
+    this is all defined in the component
+     */
     this.http.post('/api/postBlog', body).subscribe();
   }
 
