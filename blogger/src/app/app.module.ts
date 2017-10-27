@@ -12,9 +12,13 @@ import {BlogFormComponent} from './posts/posts.BlogFormComponent';
 // Define the routes
 const ROUTES = [
   {
-    path: 'posts',
-    component: PostsComponent
-  }
+    path: 'blog',
+    component: BlogFormComponent
+  },
+  { path: '',
+    redirectTo: '/blog',
+    pathMatch: 'full'
+  },
 ];
 
 @NgModule({
