@@ -14,7 +14,7 @@ const ROUTES = [
   {
     path: 'posts',
     component: PostsComponent
-  }
+  },
 ];
 
 @NgModule({

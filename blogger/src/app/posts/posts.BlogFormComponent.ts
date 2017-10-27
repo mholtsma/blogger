@@ -3,7 +3,7 @@
  */
 import { Component } from '@angular/core';
 
-import {FormBuilder, FormGroup} from '@angular/forms';
+  import {FormBuilder, FormGroup} from '@angular/forms';
 import {PostsService} from '../posts.service';
 
 @Component({
@@ -13,14 +13,12 @@ import {PostsService} from '../posts.service';
 export class BlogFormComponent {
   // intialize a form
   blogPostForm: FormGroup;
-  commentForm: FormGroup;
 
   constructor(
     private fb: FormBuilder,
     private postsService: PostsService,
   ){
     this.createForm();
-    this.createCommentForm();
   }
 
   // create the form
@@ -28,12 +26,6 @@ export class BlogFormComponent {
     this.blogPostForm = this.fb.group({
       title: '',
       author: '',
-      body: ''
-    });
-  }
-
-  createCommentForm() {
-    this.commentForm = this.fb.group ({
       body: ''
     });
   }

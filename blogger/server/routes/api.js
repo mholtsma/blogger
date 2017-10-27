@@ -44,7 +44,7 @@ router.post('/postBlog', function(req, res) {
 });
 
 router.post('/comments', function(req, res) {
-  Blog.comments.push ({
+  Blog.comments ({
     body: req.body.body
   });
   Blog.save(function(req, res) {
