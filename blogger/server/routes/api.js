@@ -43,4 +43,13 @@ router.post('/postBlog', function(req, res) {
   });
 });
 
+router.post('/comments', function(req, res) {
+  Blog.comments.push ({
+    body: req.body.body
+  });
+  Blog.save(function(req, res) {
+    if (err) return handleError(err);
+  });
+});
+
 module.exports = router;

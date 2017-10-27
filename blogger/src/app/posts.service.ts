@@ -29,4 +29,10 @@ export class PostsService {
     this.http.post('/api/postBlog', body).subscribe();
   }
 
+  // Post comment
+  postComment(body) {
+    return this.http.post('/api/comments', body)
+      .map(res => res.json());
+  }
+
 }
