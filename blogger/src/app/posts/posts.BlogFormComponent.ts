@@ -3,7 +3,7 @@
  */
 import {Component, OnInit} from '@angular/core';
 
-  import {FormBuilder, FormGroup} from '@angular/forms';
+import {FormBuilder, FormGroup} from '@angular/forms';
 import {PostsService} from '../posts.service';
 
 @Component({
@@ -11,16 +11,16 @@ import {PostsService} from '../posts.service';
   templateUrl: './blog-form.component.html',
   styleUrls: ['./blog-post.component.css']
 })
-export class BlogFormComponent implements OnInit{
+export class BlogFormComponent implements OnInit {
   // intialize a form
   blogPostForm: FormGroup;
+  commentForm: FormGroup;   // Initialize form
   posts: any = [];
 
-  constructor(
-    private fb: FormBuilder,
-    private postsService: PostsService,
-  ) {
+  constructor(private fb: FormBuilder,
+              private postsService: PostsService,) {
     this.createForm();
+    this.createCommentForm();
   }
 
   // create the form
@@ -31,11 +31,27 @@ export class BlogFormComponent implements OnInit{
       body: ''
     });
   }
+
+  // Create the form
+  createCommentForm() {
+    this.commentForm = this.fb.group({
+      body: ''
+    });
+  }
+
   getPosts() {
     // Retrieve posts from the API
     this.postsService.getAllPosts().subscribe(posts => {
       this.posts = posts.reverse();
     });
+  }
+
+  // Post comment
+  postComment(id) {
+    console.log('POSTING COMMENT in posts.component.ts');
+    const comment = this.commentForm.get('body').value;
+    console.log('PASSING THIS INTO POSTCOMMENT: ' + comment);
+    this.postsService.postComment(id, comment).subscribe();
   }
 
   ngOnInit() {
