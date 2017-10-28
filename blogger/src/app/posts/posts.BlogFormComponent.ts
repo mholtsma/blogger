@@ -3,7 +3,7 @@
  */
 import {Component, OnInit} from '@angular/core';
 
-import {FormBuilder, FormGroup} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {PostsService} from '../posts.service';
 
 @Component({
@@ -11,10 +11,15 @@ import {PostsService} from '../posts.service';
   templateUrl: './blog-form.component.html',
   styleUrls: ['./blog-post.component.css']
 })
-export class BlogFormComponent implements OnInit{
+export class BlogFormComponent implements OnInit {
   // intialize a form
   blogPostForm: FormGroup;
   posts: any = [];
+  blogPost = {
+    title: '',
+    author: '',
+    body: '',
+  };
 
   constructor(
     private fb: FormBuilder,
@@ -25,12 +30,19 @@ export class BlogFormComponent implements OnInit{
 
   // create the form
   createForm() {
-    this.blogPostForm = this.fb.group({
-      title: '',
-      author: '',
-      body: ''
+    this.blogPostForm = new FormGroup({
+      'title': new FormControl(this.blogPost.title, [
+        Validators.required,
+        Validators.minLength(3),
+      ]),
+      'author': new FormControl(this.blogPost.author, [
+        Validators.required,
+        Validators.minLength(1),
+      ]),
+      'body': new FormControl(this.blogPost.body, Validators.required)
     });
   }
+
   getPosts() {
     // Retrieve posts from the API
     this.postsService.getAllPosts().subscribe(posts => {
@@ -60,5 +72,11 @@ export class BlogFormComponent implements OnInit{
     this.blogPostForm.get('author').reset();
     this.blogPostForm.get('body').reset();
   }
+
+  get title() { return this.blogPostForm.get('title'); }
+
+  get author() { return this.blogPostForm.get('author'); }
+
+  get body() { return this.blogPostForm.get('body'); }
 
 }
