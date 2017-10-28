@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {PostsService} from "../posts.service";
 
 import {FormBuilder, FormGroup} from '@angular/forms'
@@ -9,6 +9,7 @@ import {FormBuilder, FormGroup} from '@angular/forms'
   styleUrls: ['./posts.component.css']
 })
 export class PostsComponent implements OnInit {
+  @Input('refresh') refresh: false;
 
   posts: any = [];
   commentForm: FormGroup;   // Initialize form
@@ -39,4 +40,11 @@ export class PostsComponent implements OnInit {
     });
   }
 
+  refreshList(){
+    if(this.refresh){
+      this.postsService.getAllPosts().subscribe(posts => {
+        this.posts = posts;
+      });
+    }
+  }
 }
