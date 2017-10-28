@@ -32,6 +32,15 @@ router.get('/posts', function(req, res) {
   });
 });
 
+// var testComment = new Comment ({
+//   text: 'WE COMMENTING BABY',
+//   author: 'Moi'
+// });
+//
+// testComment.save(function (err) {
+//   if (err) return handleError(err);
+// });
+
 router.post('/postBlog', function(req, res) {
   console.log('In router post');
   console.log(req.body.title);
@@ -67,5 +76,50 @@ router.post('/comments', function(req, res) {
     }
   });
 });
+
+// var blogSchema = new Schema({
+//   title:  String,
+//   author: String,
+//   body:   String,
+//   comments: [{ body: String, date: Date }],
+//   date: { type: Date, default: Date.now },
+//   hidden: Boolean,
+//   meta: {
+//     votes: Number,
+//     favs:  Number
+//   }
+// });
+
+// var Blog = mongoose.model('Blog', blogSchema);
+
+// var testBlogPost = new Blog({
+//   title: 'WHAT',
+//   author: 'WHOMST',
+//   body: 'BOODY'
+// });
+
+// testBlogPost.save(function (err) {
+//   if (err) return handleError(err);
+//   // saved!
+// });
+
+// router.get('/posts', function(req, res) {
+//   Blog.find(function(err, blogs){
+//     if(err){
+//       res.send(err);
+//     }
+//     res.json(blogs);
+//   });
+// });
+//
+// // Get all comments
+// router.get('/comments', function(req, res) {
+//   Comment.find(function (err, comments) {
+//     if (err) {
+//       res.send(err);
+//     }
+//     res.json(comments);
+//   });
+// });
 
 module.exports = router;
