@@ -40,9 +40,4 @@ export class PostsService {
     return this.http.post('/api/comments', comment)
       .map(res => res.json());
   }
-
-  // Get all comments for a post
-  getAllCommentsForPost(id) {
-
-  }
 }

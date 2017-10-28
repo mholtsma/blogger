@@ -14,6 +14,7 @@ import {PostsService} from '../posts.service';
 export class BlogFormComponent implements OnInit {
   // intialize a form
   blogPostForm: FormGroup;
+  commentForm: FormGroup;   // Initialize form
   posts: any = [];
   blogPost = {
     title: '',
@@ -24,7 +25,6 @@ export class BlogFormComponent implements OnInit {
   constructor(
     private postsService: PostsService,
   ) {
-  }
 
   // create the form
   createForm() {
@@ -41,11 +41,24 @@ export class BlogFormComponent implements OnInit {
     });
   }
 
+  // Create the form
+  createCommentForm() {
+    this.commentForm = this.fb.group({
+      body: ''
+    });
+  }
+
   getPosts() {
     // Retrieve posts from the API
     this.postsService.getAllPosts().subscribe(posts => {
       this.posts = posts.reverse();
     });
+  }
+
+  // Post comment
+  postComment(id) {
+    const comment = this.commentForm.get('body').value;       // Get comment body from comment form
+    this.postsService.postComment(id, comment).subscribe();
   }
 
   ngOnInit() {
