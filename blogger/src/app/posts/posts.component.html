@@ -10,10 +10,10 @@
       <div>
         <form [formGroup]="commentForm">
           <textarea name="comment" class="form-control" formControlName="body"></textarea>
-          <button type="submit" class="btn btn-success" (click)="postComment()">Submit</button>
+          <button type="submit" class="btn btn-success" (click)="postComment(post._id)">Submit</button>
         </form>
         <div>
-          <li *ngFor="let comment of posts.comments">
+          <li *ngFor="let comment of post.comments">
             <div>{{comment.body}}</div>
             <div>{{comment.date}}</div>
           </li>

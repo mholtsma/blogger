@@ -25,10 +25,11 @@ export class PostsComponent implements OnInit {
   }
 
   // Post comment
-  postComment() {
-    console.log("POSTING COMMENT");
+  postComment(id) {
+    console.log("POSTING COMMENT in posts.component.ts");
     const comment = this.commentForm.get('body').value;
-    this.postsService.postComment(comment).subscribe();
+    console.log("PASSING THIS INTO POSTCOMMENT: " + comment);
+    this.postsService.postComment(id, comment).subscribe();
   }
 
   ngOnInit() {

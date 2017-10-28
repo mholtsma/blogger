@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
+const bodyParser = require('body-parser');
+const axios = require('axios');
+
 var mongoose = require('mongoose');
 var Blog = require('../models/model');
-
-// declare axios for making http requests
-const axios = require('axios');
 
 // var testBlogPost = new Blog({
 //   title: 'Test',
@@ -19,6 +19,8 @@ const axios = require('axios');
 //});
 
 //Example query to database
+
+router.use(bodyParser.urlencoded({extended: false}));
 
 router.get('/posts', function(req, res) {
   Blog.find(function(err, blogs){
@@ -44,11 +46,25 @@ router.post('/postBlog', function(req, res) {
 });
 
 router.post('/comments', function(req, res) {
-  Blog.comments ({
-    body: req.body.body
-  });
-  Blog.save(function(req, res) {
+  console.log("POSTING COMMENT in api.js");
+  Blog.findOne({_id: req.body.id}, function(err, blog) {
+    //console.log("TRYING TO GET ONE BLOG WITH ID: " + req.body);
+    console.log("THIS IS THE REQ BODY: " + req.body);
     if (err) return handleError(err);
+    if (blog) {
+      console.log("THERE IS A BLOG");
+      console.log("REQ.BODY.BODY: " + req.body.body);
+      blog.comments.push({
+        body: req.body.body
+      });
+      blog.save(function (err) {
+        console.log("SAVING TO DB");
+        if (err) return handleError(err);
+      });
+    }
+    else {
+      console.log("THERE IS NO BLOG");
+    }
   });
 });
 
