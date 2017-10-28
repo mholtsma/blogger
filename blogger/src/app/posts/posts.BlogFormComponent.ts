@@ -3,7 +3,7 @@
  */
 import {Component, OnInit} from '@angular/core';
 
-import {FormBuilder, FormGroup} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {PostsService} from '../posts.service';
 
 @Component({
@@ -12,10 +12,13 @@ import {PostsService} from '../posts.service';
   styleUrls: ['./blog-post.component.css']
 })
 export class BlogFormComponent implements OnInit {
-  // intialize a form
+
+  // Initialize form
   blogPostForm: FormGroup;
-  commentForm: FormGroup;   // Initialize form
+  commentForm: FormGroup;
+
   posts: any = [];
+  //enableBtn = true;
 
   constructor(private fb: FormBuilder,
               private postsService: PostsService,) {
@@ -35,7 +38,10 @@ export class BlogFormComponent implements OnInit {
   // Create the form
   createCommentForm() {
     this.commentForm = this.fb.group({
-      body: ''
+      body: ['', Validators.compose([
+        Validators.required,
+        Validators.minLength(1)
+      ])]
     });
   }
 
@@ -48,8 +54,12 @@ export class BlogFormComponent implements OnInit {
 
   // Post comment
   postComment(id) {
+    // this.enableBtn = false;                                   // Disable button while saving to db
+
     const comment = this.commentForm.get('body').value;       // Get comment body from comment form
-    this.postsService.postComment(id, comment).subscribe();
+    this.postsService.postComment(id, comment).subscribe(data => {
+      this.postsService.getAllPosts();                        // Refresh blogs to show new comment
+    });
   }
 
   ngOnInit() {

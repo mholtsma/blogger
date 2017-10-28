@@ -33,7 +33,7 @@
       <!--Form for comments-->
       <form [formGroup]="commentForm">
         <textarea name="comment" class="form-control" formControlName="body" placeholder="Write a comment here"></textarea>
-        <button type="submit" class="btn btn-success" (click)="postComment(post._id)">Submit</button>
+        <button [disabled]="!commentForm.valid" type="submit" class="btn btn-success" (click)="postComment(post._id)">Submit</button>
       </form>
 
       <div>
