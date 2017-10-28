@@ -29,4 +29,20 @@ export class PostsService {
     this.http.post('/api/postBlog', body).subscribe();
   }
 
+  // Post comment
+  postComment(id, body) {
+    console.log("POSTING COMMENT in posts.service.ts");
+    console.log("POST SERVICE COMMENT BODY: " + body);
+    const comment = {
+      id: id,
+      body: body
+    }
+    return this.http.post('/api/comments', comment)
+      .map(res => res.json());
+  }
+
+  // Get all comments for a post
+  getAllCommentsForPost(id) {
+
+  }
 }

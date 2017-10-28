@@ -9,6 +9,7 @@ import {HttpModule} from "@angular/http";
 import {PostsService} from "./posts.service";
 import {BlogFormComponent} from './posts/posts.BlogFormComponent';
 
+
 // Define the routes
 const ROUTES = [
   {
@@ -18,6 +19,10 @@ const ROUTES = [
   { path: '',
     redirectTo: '/blog',
     pathMatch: 'full'
+  },
+  {
+    path: 'posts',
+    component: PostsComponent
   },
 ];
 
@@ -34,7 +39,9 @@ const ROUTES = [
     HttpModule,
     RouterModule.forRoot(ROUTES) // Add routes to the app
   ],
-  providers: [PostsService],
+  providers: [
+    PostsService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
