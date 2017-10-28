@@ -13,6 +13,14 @@ import {BlogFormComponent} from './posts/posts.BlogFormComponent';
 // Define the routes
 const ROUTES = [
   {
+    path: 'blog',
+    component: BlogFormComponent
+  },
+  { path: '',
+    redirectTo: '/blog',
+    pathMatch: 'full'
+  },
+  {
     path: 'posts',
     component: PostsComponent
   },
