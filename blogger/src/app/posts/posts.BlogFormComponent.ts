@@ -48,9 +48,7 @@ export class BlogFormComponent implements OnInit {
 
   // Post comment
   postComment(id) {
-    console.log('POSTING COMMENT in posts.component.ts');
-    const comment = this.commentForm.get('body').value;
-    console.log('PASSING THIS INTO POSTCOMMENT: ' + comment);
+    const comment = this.commentForm.get('body').value;       // Get comment body from comment form
     this.postsService.postComment(id, comment).subscribe();
   }
 

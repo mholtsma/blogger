@@ -32,15 +32,6 @@ router.get('/posts', function(req, res) {
   });
 });
 
-// var testComment = new Comment ({
-//   text: 'WE COMMENTING BABY',
-//   author: 'Moi'
-// });
-//
-// testComment.save(function (err) {
-//   if (err) return handleError(err);
-// });
-
 router.post('/postBlog', function(req, res) {
   console.log('In router post');
   console.log(req.body.title);
@@ -54,25 +45,20 @@ router.post('/postBlog', function(req, res) {
   });
 });
 
+// Save comment on blog to db
 router.post('/comments', function(req, res) {
-  console.log("POSTING COMMENT in api.js");
+
   Blog.findOne({_id: req.body.id}, function(err, blog) {
-    //console.log("TRYING TO GET ONE BLOG WITH ID: " + req.body);
-    console.log("THIS IS THE REQ BODY: " + req.body);
     if (err) return handleError(err);
+
+    // Make sure there is something to push
     if (blog) {
-      console.log("THERE IS A BLOG");
-      console.log("REQ.BODY.BODY: " + req.body.body);
       blog.comments.push({
         body: req.body.body
       });
       blog.save(function (err) {
-        console.log("SAVING TO DB");
         if (err) return handleError(err);
       });
-    }
-    else {
-      console.log("THERE IS NO BLOG");
     }
   });
 });
