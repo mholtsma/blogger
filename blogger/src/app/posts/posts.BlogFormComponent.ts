@@ -3,7 +3,7 @@
  */
 import {Component, OnInit} from '@angular/core';
 
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators, FormsModule} from '@angular/forms';
 import {PostsService} from '../posts.service';
 
 @Component({
@@ -22,24 +22,22 @@ export class BlogFormComponent implements OnInit {
   };
 
   constructor(
-    private fb: FormBuilder,
     private postsService: PostsService,
   ) {
-    this.createForm();
   }
 
   // create the form
   createForm() {
     this.blogPostForm = new FormGroup({
-      'title': new FormControl(this.blogPost.title, [
-        Validators.required,
-        Validators.minLength(3),
-      ]),
-      'author': new FormControl(this.blogPost.author, [
-        Validators.required,
-        Validators.minLength(1),
-      ]),
-      'body': new FormControl(this.blogPost.body, Validators.required)
+    'title': new FormControl(this.blogPost.title, [
+    Validators.required,
+    Validators.minLength(3),
+    ]),
+    'author': new FormControl(this.blogPost.author, [
+    Validators.required,
+    Validators.minLength(1),
+    ]),
+    'body': new FormControl(this.blogPost.body, Validators.required)
     });
   }
 
@@ -52,6 +50,8 @@ export class BlogFormComponent implements OnInit {
 
   ngOnInit() {
     this.getPosts();
+
+    this.createForm();
   }
 
   // when the submit button is pressed we process the data
