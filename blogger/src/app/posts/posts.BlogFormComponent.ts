@@ -2,8 +2,8 @@
  * Created by marcholtsman on 10/18/17.
  */
 import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormControl, FormGroup, Validators, FormsModule} from '@angular/forms';
 
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {PostsService} from '../posts.service';
 
 @Component({
@@ -18,18 +18,29 @@ export class BlogFormComponent implements OnInit {
   commentForm: FormGroup;
 
   posts: any = [];
+  blogPost = {
+    title: '',
+    author: '',
+    body: '',
+  };
 
-  constructor(private fb: FormBuilder, private postsService: PostsService,) {
+  constructor(private fb: FormBuilder, private postsService: PostsService) {
     this.createForm();
     this.createCommentForm();
   }
 
   // create the form
   createForm() {
-    this.blogPostForm = this.fb.group({
-      title: '',
-      author: '',
-      body: ''
+    this.blogPostForm = new FormGroup({
+    'title': new FormControl(this.blogPost.title, [
+    Validators.required,
+    Validators.minLength(3),
+    ]),
+    'author': new FormControl(this.blogPost.author, [
+    Validators.required,
+    Validators.minLength(1),
+    ]),
+    'body': new FormControl(this.blogPost.body, Validators.required)
     });
   }
 
@@ -59,6 +70,8 @@ export class BlogFormComponent implements OnInit {
 
   ngOnInit() {
     this.getPosts();
+
+    this.createForm();
   }
 
   // when the submit button is pressed we process the data
@@ -79,5 +92,11 @@ export class BlogFormComponent implements OnInit {
     this.blogPostForm.get('author').reset();
     this.blogPostForm.get('body').reset();
   }
+
+  get title() { return this.blogPostForm.get('title'); }
+
+  get author() { return this.blogPostForm.get('author'); }
+
+  get body() { return this.blogPostForm.get('body'); }
 
 }

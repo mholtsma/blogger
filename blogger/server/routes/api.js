@@ -38,7 +38,7 @@ router.post('/postBlog', function(req, res) {
   var blogPost = new Blog({
     title: req.body.title,
     author: req.body.author,
-    body: req.body.body
+    body: req.body.body,
   });
   blogPost.save(function (err) {
     if (err) return handleError(err);
