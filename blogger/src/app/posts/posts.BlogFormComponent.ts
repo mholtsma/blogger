@@ -21,7 +21,7 @@ export class BlogFormComponent implements OnInit {
     author: '',
     body: '',
   };
-
+  
   constructor(private fb: FormBuilder,
               private postsService: PostsService,) {
     this.createCommentForm();
