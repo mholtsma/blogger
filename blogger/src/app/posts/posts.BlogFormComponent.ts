@@ -36,7 +36,6 @@ export class BlogFormComponent implements OnInit {
     ]),
     'author': new FormControl(this.blogPost.author, [
     Validators.required,
-    Validators.minLength(1),
     ]),
     'body': new FormControl(this.blogPost.body, Validators.required)
     });
