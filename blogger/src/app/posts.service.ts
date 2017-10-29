@@ -31,8 +31,6 @@ export class PostsService {
 
   // Post comment
   postComment(id, body) {
-    console.log("POSTING COMMENT in posts.service.ts");
-    console.log("POST SERVICE COMMENT BODY: " + body);
     const comment = {
       id: id,
       body: body

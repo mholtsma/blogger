@@ -18,10 +18,8 @@ export class BlogFormComponent implements OnInit {
   commentForm: FormGroup;
 
   posts: any = [];
-  //enableBtn = true;
 
-  constructor(private fb: FormBuilder,
-              private postsService: PostsService,) {
+  constructor(private fb: FormBuilder, private postsService: PostsService,) {
     this.createForm();
     this.createCommentForm();
   }
@@ -54,12 +52,9 @@ export class BlogFormComponent implements OnInit {
 
   // Post comment
   postComment(id) {
-    // this.enableBtn = false;                                   // Disable button while saving to db
-
     const comment = this.commentForm.get('body').value;       // Get comment body from comment form
-    this.postsService.postComment(id, comment).subscribe(data => {
-      this.postsService.getAllPosts();                        // Refresh blogs to show new comment
-    });
+    this.postsService.postComment(id, comment).subscribe();
+    this.commentForm.reset();                                 // Clear form after comment submission
   }
 
   ngOnInit() {
