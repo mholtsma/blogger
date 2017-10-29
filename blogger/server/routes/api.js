@@ -54,7 +54,8 @@ router.post('/comments', function(req, res) {
     // Make sure there is something to push
     if (blog) {
       blog.comments.push({
-        body: req.body.body
+        body: req.body.body,
+        date: req.body.date
       });
       blog.save(function (err) {
         if (err) return handleError(err);

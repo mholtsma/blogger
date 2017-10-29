@@ -30,11 +30,12 @@ export class PostsService {
   }
 
   // Post comment
-  postComment(id, body) {
+  postComment(id, body, date) {
     const comment = {
       id: id,
-      body: body
-    }
+      body: body,
+      date: date
+    };
     return this.http.post('/api/comments', comment)
       .map(res => res.json());
   }

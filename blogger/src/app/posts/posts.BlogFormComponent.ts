@@ -32,15 +32,15 @@ export class BlogFormComponent implements OnInit {
   // create the form
   createForm() {
     this.blogPostForm = new FormGroup({
-    'title': new FormControl(this.blogPost.title, [
-    Validators.required,
-    Validators.minLength(3),
-    ]),
-    'author': new FormControl(this.blogPost.author, [
-    Validators.required,
-    Validators.minLength(1),
-    ]),
-    'body': new FormControl(this.blogPost.body, Validators.required)
+      'title': new FormControl(this.blogPost.title, [
+        Validators.required,
+        Validators.minLength(3),
+      ]),
+      'author': new FormControl(this.blogPost.author, [
+        Validators.required,
+        Validators.minLength(1),
+      ]),
+      'body': new FormControl(this.blogPost.body, Validators.required)
     });
   }
 
@@ -63,9 +63,11 @@ export class BlogFormComponent implements OnInit {
 
   // Post comment
   postComment(id) {
+    var date = new Date();
     const comment = this.commentForm.get('body').value;       // Get comment body from comment form
-    this.postsService.postComment(id, comment).subscribe();
+    this.postsService.postComment(id, comment, date).subscribe();
     this.commentForm.reset();                                 // Clear form after comment submission
+    this.getPosts();
   }
 
   ngOnInit() {
@@ -93,10 +95,16 @@ export class BlogFormComponent implements OnInit {
     this.blogPostForm.get('body').reset();
   }
 
-  get title() { return this.blogPostForm.get('title'); }
+  get title() {
+    return this.blogPostForm.get('title');
+  }
 
-  get author() { return this.blogPostForm.get('author'); }
+  get author() {
+    return this.blogPostForm.get('author');
+  }
 
-  get body() { return this.blogPostForm.get('body'); }
+  get body() {
+    return this.blogPostForm.get('body');
+  }
 
 }

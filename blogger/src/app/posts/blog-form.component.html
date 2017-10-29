@@ -66,11 +66,14 @@
       <form [formGroup]="commentForm">
         <textarea name="comment" class="form-control" formControlName="body"
                   placeholder="Write a comment here"></textarea>
+
+        <!--Disable button if invalid form-->
         <button [disabled]="!commentForm.valid" type="submit" class="btn btn-success"
                 (click)="postComment(post._id)">Submit</button>
       </form>
 
       <div>
+        <h4>Comments</h4>
 
         <!--List comments below blog post-->
         <div class="card" *ngFor="let comment of post.comments">
