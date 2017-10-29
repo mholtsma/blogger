@@ -1,24 +1,56 @@
 
 <h1 class="header">Blog Form </h1>
 <div class="container">
-<form [formGroup]="blogPostForm" (ngSubmit)="onSubmit()">
+<form [formGroup]="blogPostForm" (ngSubmit)="onSubmit()" #formDir="ngForm">
   <div class="form-group">
     <label for="title">Title</label>
     <input type="text" class="form-control" id="title" required formControlName="title" name="title">
+  <div *ngIf="title.invalid && (title.dirty || title.touched)"
+       class="alert alert-danger">
+
+    <div *ngIf="title.errors.required">
+      Title is required.
+    </div>
+    <div *ngIf="title.errors.minlength">
+      Title must be at least 3 characters long.
+    </div>
+
+  </div>
   </div>
 
   <div class="form-group">
     <label for="author">author</label>
-    <input type="text" class="form-control" id="author" formControlName="author" name="author">
+    <input type="text" class="form-control" id="author" formControlName="author" name="author" required minlength="1">
+
+    <div *ngIf="author.invalid && (author.dirty || author.touched)"
+         class="alert alert-danger">
+
+      <div *ngIf="author.errors">
+        Author is required.
+      </div>
+      <div *ngIf="author.errors.minlength">
+        Author must be at least one character long.
+      </div>
+
+    </div>
   </div>
 
   <div class="form-group">
     <label for="body">body</label>
-    <textarea rows="4" cols="50" class="form-control" id="body" formControlName="body" name="body">
+    <textarea rows="4" cols="50" class="form-control" id="body" formControlName="body" name="body" required>
     </textarea>
+
+    <div *ngIf="body.invalid && (body.dirty || body.touched)"
+         class="alert alert-danger">
+
+      <div *ngIf="body.errors.required">
+        Body is required.
+      </div>
+
+    </div>
   </div>
 
-  <button type="submit" class="btn btn-success" >Submit</button>
+  <button type="submit" class="btn btn-success" [disabled]="blogPostForm.invalid">Submit</button>
 
 </form>
   <div class="card" *ngFor="let post of posts">
