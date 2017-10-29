@@ -22,9 +22,10 @@ export class BlogFormComponent implements OnInit {
     body: '',
   };
 
-  constructor(
-    private postsService: PostsService,
-  ) {
+  constructor(private fb: FormBuilder,
+              private postsService: PostsService,) {
+    this.createCommentForm();
+  }
 
   // create the form
   createForm() {
