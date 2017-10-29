@@ -5,19 +5,6 @@
       <h4 class="card-title">{{ post.title }}</h4>
       <p class="card-text">{{post.body}}</p>
     </div>
-
-      <div>
-        <form [formGroup]="commentForm">
-          <textarea name="comment" class="form-control" formControlName="body"></textarea>
-          <button type="submit" class="btn btn-success" (click)="postComment(post._id)">Submit</button>
-        </form>
-        <div>
-          <li *ngFor="let comment of post.comments">
-            <div>{{comment.body}}</div>
-            <div>{{comment.date}}</div>
-          </li>
-        </div>
-      </div>
-
   </div>
+
 </div>
